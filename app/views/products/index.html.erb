@@ -1,0 +1,16 @@
+<h1>Welcome to Anazon</h1>
+
+<table class="table">
+  <th>Name</th>
+  <th>Price</th>
+  <th>Image</th>
+  <th>Desciption</th>
+    <% @products.each do |product| %>
+    <tr>
+      <td><%= product.name %></td>
+      <td><%= number_to_currency(product.price) %></td>
+      <td><%= image_tag product.image, alt: 'Alt Image Text' %></td>
+      <td><%= product.description %></td>
+    </tr>
+    <% end %>
+</table>

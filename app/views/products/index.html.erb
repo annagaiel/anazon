@@ -7,9 +7,9 @@
   <th>Desciption</th>
     <% @products.each do |product| %>
     <tr>
-      <td><%= product.name %></td>
+      <td><%= link_to product.name, "/products/#{product.id}" %></td>
       <td><%= number_to_currency(product.price) %></td>
-      <td><%= image_tag product.image, alt: 'Alt Image Text' %></td>
+      <td><%= image_tag product.image, alt: 'Alt Image Text', class: 'img-responsive' %></td>
       <td><%= product.description %></td>
     </tr>
     <% end %>

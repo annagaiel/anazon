@@ -1,0 +1,22 @@
+<h1><%= @product.name %></h1>
+
+<%= image_tag @product.image, alt: 'Alt Image Text', class: 'img-responsive' %>
+
+<table class="table">
+  <tr>
+    <th>
+      Price
+    </th>
+    <td>
+      <%= number_to_currency(@product.price) %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Decription
+    </th>
+    <td>
+      <%= @product.description %>
+    </td>
+  </tr>
+</table>

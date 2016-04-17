@@ -19,20 +19,22 @@ class ProductsController < ApplicationController
     @new_product.save
 
     if @new_product.valid?
-      redirect_to root_path
+      flash[:success] = "#{@new_product.name} was created!"
+      redirect_to "/products/#{@new_product.id}"
     end
   end
 
   def update
     @product = Product.find_by(id: params[:id])
     @product.update_attributes(name: params[:name], price: params[:price], image: params[:image], description: params[:description])
-    redirect_to products_path(@product)
+    flash[:success] = "#{@product.name} was update!"
+    redirect_to "/products/#{@product.id}"
   end
 
   def destroy
     @product = Product.find_by(id: params[:id])
     @product.destroy
-
+    flash[:success] = "#{@product.name} was deleted!"
     redirect_to root_path
   end
 

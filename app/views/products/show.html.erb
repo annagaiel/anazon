@@ -1,5 +1,8 @@
 <h1><%= @product.name %></h1>
 
+<a href="/products/<%= @product.id %>/edit">Edit</a>
+<%= link_to "Delete", "/products/#{@product.id}", method: :delete %>
+
 <%= image_tag @product.image, alt: 'Alt Image Text', class: 'img-responsive' %>
 
 <table class="table">
@@ -20,3 +23,6 @@
     </td>
   </tr>
 </table>
+
+<%= link_to "Back", "/products" %>
+

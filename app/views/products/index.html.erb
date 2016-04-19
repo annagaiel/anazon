@@ -1,15 +1,11 @@
 <h1>Welcome to Anazon</h1>
 
-<%= link_to "Add new product", "/products/new" %>
-
 <div class="row">
   <% @products.each do |product| %>
     <div class="col-md-3">
       <div class="thumbnail">
         <a href="/products/<%= product.id %>">
-          <p><%= product.name %></p>
-          <p><%= number_to_currency(product.price) %></p>
-          <p><%= product.description %></p>
+          <p><%= product.name %> - <%= number_to_currency(product.price) %></p>
           <img src="<%= product.image %>" alt="<%= product.name %>" class = 'img-responsive' width="200" column="200" />
         </a>
       </div>

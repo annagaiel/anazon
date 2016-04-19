@@ -1,27 +1,39 @@
-<h1><%= @product.name %></h1>
+<h1><%= @product.name %> - <span class=<%= @product.color_price %>><%= @product.sale_message %></span></h1>
 
-<a href="/products/<%= @product.id %>/edit" class="btn btn-default">Edit</a>
-<%= link_to "Delete", "/products/#{@product.id}", method: :delete, class: 'btn btn-primary' %>
+<div class="row">
+  <div class="col-md-12">
+    <%= @product.description %>
+  </div>
+</div>
 
 <%= image_tag @product.image, alt: 'Alt Image Text', class: 'img-responsive' %>
 
-<table class="table">
+<table class="table table-condensed">
   <tr>
     <th>
       Price
     </th>
-    <td>
-      <%= number_to_currency(@product.price) %>
+    <td class=<%= @product.color_price%>>
+      <%= number_to_currency @product.price %>
     </td>
   </tr>
   <tr>
     <th>
-      Decription
+      Tax:
     </th>
     <td>
-      <%= @product.description %>
+      <%= number_to_currency @product.tax %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Total:
+    </th>
+    <td>
+      <%= number_to_currency @product.total %>
     </td>
   </tr>
 </table>
 
-<%= link_to "Back", "/products", class: 'btn btn-default' %>
+<a href="/products/<%= @product.id %>/edit" class="btn btn-success">Edit</a>
+<%= link_to "Delete", "/products/#{@product.id}", method: :delete, class: 'btn btn-danger' %>

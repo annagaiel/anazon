@@ -2,7 +2,12 @@
 
 <div class="row">
   <div class="col-md-12">
-    <%= @product.description %>
+    <%= @product.description %> -
+    <% if @product.available %>
+      <span> in stock</span>
+    <% else %>
+      <span> out of stock </span>
+    <% end %>
   </div>
 </div>
 

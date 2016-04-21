@@ -5,6 +5,7 @@ class Product < ActiveRecord::Base
   validates :description, presence: true
 
   DISCOUNT_THRESHOLD = 2
+  QUANTITY = 0
 
   def sale_message
     price < DISCOUNT_THRESHOLD ? "Discount Item" : "On Sale!"
@@ -20,5 +21,9 @@ class Product < ActiveRecord::Base
 
   def color_price
     price < DISCOUNT_THRESHOLD ? "green" : "red"
+  end
+
+  def self.in_stock
+    QUANTITY > 5 ? true :false
   end
 end

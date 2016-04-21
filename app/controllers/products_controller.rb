@@ -1,6 +1,19 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    sort = params[:sort]
+    if sort.nil?
+      @products = Product.all
+    else
+      if sort == 'high'
+        @products = Product.order(price: :desc)
+      elsif sort == 'low'
+        @products = Product.order(price: :asc)
+      elsif sort == 'discount'
+        @products = Product.where("price < 8")
+      elsif sort == 'random'
+        @products = Product.find()
+      end
+    end
   end
 
   def show
@@ -15,7 +28,8 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @new_product = Product.new(name: params[:name], price: params[:price], image: params[:image], description: params[:description])
+    @new_product = Product.new(name: params[:name], price: params[:price], image: params[:image],
+     description: params[:description], available: Product.in_stock)
     @new_product.save
 
     if @new_product.valid?
@@ -26,7 +40,8 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find_by(id: params[:id])
-    @product.update_attributes(name: params[:name], price: params[:price], image: params[:image], description: params[:description])
+    @product.update_attributes(name: params[:name], price: params[:price],
+     image: params[:image], description: params[:description], available: Product.in_stock)
     flash[:success] = "#{@product.name} was update!"
     redirect_to "/products/#{@product.id}"
   end

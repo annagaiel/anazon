@@ -10,14 +10,19 @@ class ProductsController < ApplicationController
         @products = Product.order(price: :asc)
       elsif sort == 'discount'
         @products = Product.where("price < 8")
-      elsif sort == 'random'
-        @products = Product.find()
       end
+    end
+
+    search = params[:search]
+    if search.nil? == false
+      @products = Product.where("name LIKE ?", "%#{search}%")
+      p @products
     end
   end
 
   def show
     @product = Product.find(params[:id])
+    @products = Product.find(params[:id])
   end
 
   def new

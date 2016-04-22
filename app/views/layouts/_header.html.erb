@@ -18,7 +18,7 @@
           <%= link_to "New product", "/products/new" %><span class="sr-only">(current)</span>
         </li>
         <li><a href="/products?sort=discount">Discount Items</a></li>
-        <li><a href="/products/<%= Product.random %>">Random Product</a></li>
+        <li><a href="/products/random">Random Product</a></li>
       </ul>
       <%= form_tag '/products', :class => "navbar-form navbar-left", :role =>"search",method: :get do %>
         <div class='form-group'>

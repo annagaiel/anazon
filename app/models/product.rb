@@ -26,13 +26,4 @@ class Product < ActiveRecord::Base
   def self.in_stock
     QUANTITY > 5 ? true :false
   end
-
-  def self.random
-    all_products = Product.all
-    valid_ids = []
-    all_products.each do |product|
-      valid_ids << product.id
-    end
-    valid_ids.sample
-  end
 end

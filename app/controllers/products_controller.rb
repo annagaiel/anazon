@@ -16,13 +16,15 @@ class ProductsController < ApplicationController
     search = params[:search]
     if search.nil? == false
       @products = Product.where("name LIKE ?", "%#{search}%")
-      p @products
     end
   end
 
   def show
-    @product = Product.find(params[:id])
-    @products = Product.find(params[:id])
+    if params[:id] == "random"
+      @product = Product.all.sample
+    else
+      @product = Product.find(params[:id])
+    end
   end
 
   def new

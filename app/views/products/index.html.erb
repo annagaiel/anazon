@@ -14,7 +14,7 @@
       <div class="thumbnail">
         <a href="/products/<%= product.id %>">
           <p><%= product.name %> - <%= number_to_currency(product.price) %></p>
-          <img src="<%= product.image %>" alt="<%= product.name %>" class = 'img-responsive' width="200" column="200" />
+          <img src="<%= product.images.first.url %>" alt="<%= product.name %>" class = 'img-responsive' width="200" column="200" />
         </a>
       </div>
     </div>

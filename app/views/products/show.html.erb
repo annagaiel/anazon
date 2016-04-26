@@ -11,9 +11,24 @@
   </div>
 </div>
 
-<%= image_tag @product.image, alt: 'Alt Image Text', class: 'img-responsive' %>
+<% @product.images.each do |image| %>
+<div class="col-xs-3">
+  <a href="#" class="thumbnail">
+    <img src="<%= image.url %>" class = 'img-responsive' width="100" column="100" />
+  </a>
+</div>
+
+<% end %>
 
 <table class="table table-condensed">
+  <tr>
+    <th>
+      Supplier
+    </th>
+    <td>
+      <%= @product.supplier.name%>
+    </td>
+  </tr>
   <tr>
     <th>
       Price

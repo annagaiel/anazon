@@ -1,21 +1,11 @@
 class ProductsController < ApplicationController
   def index
-    sort = params[:sort]
-    if sort.nil?
-      @products = Product.all
+    if params[:sort]
+      @products = Product.order(params[:sort] => params[:sort_order])
+    elsif params[:discount]
+      @products = Product.where("price < ?", 8)
     else
-      if sort == 'high'
-        @products = Product.order(price: :desc)
-      elsif sort == 'low'
-        @products = Product.order(price: :asc)
-      elsif sort == 'discount'
-        @products = Product.where("price < 8")
-      end
-    end
-
-    search = params[:search]
-    if search.nil? == false
-      @products = Product.where("name LIKE ?", "%#{search}%")
+      @products = Product.all
     end
   end
 
@@ -60,4 +50,9 @@ class ProductsController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    search_term = params[:user_search]
+    @products = Product.where("name LIKE ? OR description LIKE ?", "%#{search_term}%", "%#{search_term}%")
+    render :index
+  end
 end

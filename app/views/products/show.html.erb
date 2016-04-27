@@ -11,14 +11,19 @@
   </div>
 </div>
 
-<% @product.images.each do |image| %>
-<div class="col-xs-3">
-  <a href="#" class="thumbnail">
-    <img src="<%= image.url %>" class = 'img-responsive' width="100" column="100" />
-  </a>
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to "Add Image", "/products/images/new", class: 'btn btn-primary' %>
+  </div>
+  <% @product.images.each do |image| %>
+    <div class="col-xs-4">
+      <a href="#" class="thumbnail">
+        <img src="<%= image.url %>" class = 'img-responsive' width="100" column="100" />
+      </a>
+    </div>
+  <% end %>
 </div>
 
-<% end %>
 
 <table class="table table-condensed">
   <tr>

@@ -25,8 +25,8 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @new_product = Product.new(name: params[:name], price: params[:price], image: params[:image],
-     description: params[:description], available: Product.in_stock)
+    @new_product = Product.new(name: params[:name], price: params[:price],
+     description: params[:description], available: Product.in_stock, supplier_id: params[:supplier]["supplier_id"])
     @new_product.save
 
     if @new_product.valid?

@@ -64,6 +64,7 @@
   <div class='form-group'>
     <%= label_tag :quantity, nil, :class => "control-label" %>
     <%= text_field_tag :quantity, nil, :class => "form-control"  %>
+    <%= hidden_field_tag :product_id, @product.id, :class => "form-control"  %>
   </div>
   <%= submit_tag 'Buy Now', class: 'btn btn-success' %>
 <% end %>

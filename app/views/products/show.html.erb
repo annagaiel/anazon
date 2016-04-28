@@ -60,5 +60,13 @@
   </tr>
 </table>
 
+<%= form_tag '/orders', method: :post do %>
+  <div class='form-group'>
+    <%= label_tag :quantity, nil, :class => "control-label" %>
+    <%= text_field_tag :quantity, nil, :class => "form-control"  %>
+  </div>
+  <%= submit_tag 'Buy Now', class: 'btn btn-success' %>
+<% end %>
+
 <a href="/products/<%= @product.id %>/edit" class="btn btn-success">Edit</a>
 <%= link_to "Delete", "/products/#{@product.id}", method: :delete, class: 'btn btn-danger' %>

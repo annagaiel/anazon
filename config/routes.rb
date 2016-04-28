@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   get '/products/images/new', to: 'images#new'
   post '/products/images', to: 'images#create'
+  #orders
+  post '/orders', to: 'orders#create'
+
 
   # resources :products
   # The priority is based upon order of creation: first created -> highest priority.

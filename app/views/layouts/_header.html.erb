@@ -27,7 +27,12 @@
         <%= submit_tag 'Search', class: 'btn btn-primary' %>
       <% end %>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <% if current_user %>
+          <li><%= link_to "Sign Out", "/users/sign_out", method: :delete %></li>
+        <% else %>
+          <li><%= link_to "Sign Up", "/users/sign_up" %></li>
+          <li><%= link_to "Login", "/users/sign_in" %></li>
+        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

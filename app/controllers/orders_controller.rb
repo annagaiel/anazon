@@ -12,10 +12,15 @@ class OrdersController < ApplicationController
                       )
     @order.save
     flash[:success] = 'New order saved!'
-    redirect_to "/orders/show"
+    redirect_to "/orders/#{@order.id}"
   end
 
   def show
-    @orders = Order.all
+    @orders = current_user.orders
+  end
+
+  def index
+    @orders = current_user.orders
+    render 'show'
   end
 end

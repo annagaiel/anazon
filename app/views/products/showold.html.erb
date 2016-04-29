@@ -1,0 +1,80 @@
+<h1><%= @product.name %> - <span class=<%= @product.color_price %>><%= @product.sale_message %></span></h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= @product.description %> -
+    <% if @product.available %>
+      <span>Available</span>
+    <% else %>
+      <span>Out of Stock</span>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <%= link_to "Add Image", "/products/images/new", class: 'btn btn-primary' %>
+  </div>
+  <% @product.images.each do |image| %>
+    <div class="col-xs-4">
+      <a href="#" class="thumbnail">
+        <img src="<%= image.url %>" class = 'img-responsive' width="100" column="100" />
+      </a>
+    </div>
+  <% end %>
+</div>
+
+
+<table class="table table-condensed">
+  <tr>
+    <th>
+      Supplier
+    </th>
+    <td>
+      <%= @product.supplier.name%>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Price
+    </th>
+    <td class=<%= @product.color_price%>>
+      <%= number_to_currency @product.price %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Tax:
+    </th>
+    <td>
+      <%= number_to_currency @product.tax %>
+    </td>
+  </tr>
+  <tr>
+    <th>
+      Total:
+    </th>
+    <td>
+      <%= number_to_currency @product.total %>
+    </td>
+  </tr>
+</table>
+
+<div class="row">
+  <%= form_tag '/orders', :class => 'form-inline', method: :post do %>
+    <%= label_tag :quantity %>
+    <%= text_field_tag :quantity, nil, type: 'number', class: 'small text-center form-control' %>
+    <%= hidden_field_tag :product_id, @product.id, class: "form-control"  %>
+  <% end %>
+  <%= button_tag type: 'submit', 'aria-label' => 'Buy Now', class: 'btn btn-success' do %>
+    <span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-shopping-cart"></span>
+  <% end %>
+</div>
+
+<a href="/products/<%= @product.id %>/edit" class="btn btn-success" aria-label="Edit">
+  <span class="glyphicon glyphicon-edit"></span>
+</a>
+
+<%= link_to "/products/#{@product.id}", class: 'btn btn-danger', 'aria-label' => 'Delete', method: :delete do %>
+  <span class="glyphicon glyphicon-trash"></span>
+<% end %>

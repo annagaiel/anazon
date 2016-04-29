@@ -1,73 +1,77 @@
-<h1><%= @product.name %> - <span class=<%= @product.color_price %>><%= @product.sale_message %></span></h1>
+<h1><%= @product.name %><%= @product.images.count %></h1>
 
-<div class="row">
-  <div class="col-md-12">
-    <%= @product.description %> -
+<div class="col-xs-12 col-sm-12 col-md-3">
+  <div class="row thumbnail">
+    <a href="#">
+      <img class="img-responsive" src="<%= @product.images.first.url %>">
+    </a>
+  </div>
+</div>
+
+<div class="col-xs-12 col-sm-12 col-md-9">
+  <span class=<%= @product.color_price%>>
+    <%= number_to_currency @product.price %>
+  </span>
+  <div>
+    <%= @product.supplier.name%>
+  </div>
+  <div>
     <% if @product.available %>
-      <span> in stock</span>
+    <span>Available</span>
     <% else %>
-      <span> out of stock </span>
+    <span>Out of Stock</span>
     <% end %>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <%= link_to "Add Image", "/products/images/new", class: 'btn btn-primary' %>
-  </div>
-  <% @product.images.each do |image| %>
-    <div class="col-xs-4">
-      <a href="#" class="thumbnail">
-        <img src="<%= image.url %>" class = 'img-responsive' width="100" column="100" />
-      </a>
-    </div>
+  <p>
+    <%= @product.description %>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  </p>
+  <%= form_tag '/orders', :class => 'form-inline', method: :post do %>
+    <%= label_tag :quantity %>
+    <%= text_field_tag :quantity, nil, type: 'number', class: 'small text-center form-control' %>
+    <%= hidden_field_tag :product_id, @product.id, class: "form-control"  %>
+    <%= button_tag type: 'submit', 'aria-label' => 'Buy Now', class: 'btn btn-success' do %>
+      <span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-shopping-cart"></span>
+    <% end %>
   <% end %>
+  <table class="table">
+    <tr>
+    <th>Tax:</th>
+    <td><%= number_to_currency @product.tax %></td>
+  </tr>
+  <tr>
+    <th>Total:</th>
+    <td><%= number_to_currency @product.total %></td>
+  </tr>
+  </table>
 </div>
 
-
-<table class="table table-condensed">
-  <tr>
-    <th>
-      Supplier
-    </th>
-    <td>
-      <%= @product.supplier.name%>
-    </td>
-  </tr>
-  <tr>
-    <th>
-      Price
-    </th>
-    <td class=<%= @product.color_price%>>
-      <%= number_to_currency @product.price %>
-    </td>
-  </tr>
-  <tr>
-    <th>
-      Tax:
-    </th>
-    <td>
-      <%= number_to_currency @product.tax %>
-    </td>
-  </tr>
-  <tr>
-    <th>
-      Total:
-    </th>
-    <td>
-      <%= number_to_currency @product.total %>
-    </td>
-  </tr>
-</table>
-
-<%= form_tag '/orders', method: :post do %>
-  <div class='form-group'>
-    <%= label_tag :quantity, nil, :class => "control-label" %>
-    <%= text_field_tag :quantity, nil, :class => "form-control"  %>
-    <%= hidden_field_tag :product_id, @product.id, :class => "form-control"  %>
+<div class="col-xs-12 col-sm-12">
+  <div class="owl-carousel owl-theme">
+      <% @product.images.reverse.drop(1).each do |image| %>
+        <div class="item">
+          <a href="#">
+            <img class="thumbnail" src="<%= image.url %>">
+          </a>
+        </div>
+      <% end %>
   </div>
-  <%= submit_tag 'Buy Now', class: 'btn btn-success' %>
-<% end %>
+</div>
 
-<a href="/products/<%= @product.id %>/edit" class="btn btn-success">Edit</a>
-<%= link_to "Delete", "/products/#{@product.id}", method: :delete, class: 'btn btn-danger' %>
+<script>
+  $('.owl-carousel').owlCarousel({
+      margin:5,
+      items:3,
+      responsive:{
+          0:{
+              items:2
+          },
+          600:{
+              items:3
+          },
+          1000:{
+              items:5
+          }
+      }
+  })
+  </script>

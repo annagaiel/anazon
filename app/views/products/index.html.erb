@@ -10,11 +10,11 @@
 
 <div class="row">
   <% @products.each do |product| %>
-    <div class="col-md-3">
+    <div class="col-sm-6 col-md-3">
       <div class="thumbnail">
         <a href="/products/<%= product.id %>">
           <p><%= product.name %> - <%= number_to_currency(product.price) %></p>
-          <img src="<%= product.images.first.url %>" alt="<%= product.name %>" class = 'img-responsive' width="200" column="200" />
+          <img src="<%= product.images.first.url %>" alt="<%= product.name %>" class = 'img-responsive' />
         </a>
       </div>
     </div>

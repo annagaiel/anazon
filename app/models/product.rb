@@ -23,7 +23,7 @@ class Product < ActiveRecord::Base
   end
 
   def color_price
-    price < DISCOUNT_THRESHOLD ? "green" : "red"
+    price < DISCOUNT_THRESHOLD ? "available-price" : "sale-price"
   end
 
   def self.in_stock

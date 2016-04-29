@@ -1,4 +1,12 @@
-<h1><%= @product.name %><%= @product.images.count %></h1>
+<div class="title">
+  <h1 class="edit-controllers"><%= @product.name.capitalize %> - </h1>
+    <a href="/products/<%= @product.id %>/edit" class="btn btn-success" aria-label="Edit">
+      <span class="glyphicon glyphicon-edit"></span>
+    </a>
+    <%= link_to "/products/#{@product.id}", class: 'btn btn-danger', 'aria-label' => 'Delete', method: :delete do %>
+    <span class="glyphicon glyphicon-trash"></span>
+    <% end %>
+</div>
 
 <div class="col-xs-12 col-sm-12 col-md-3">
   <div class="row thumbnail">
@@ -12,37 +20,43 @@
   <span class=<%= @product.color_price%>>
     <%= number_to_currency @product.price %>
   </span>
-  <div>
-    <%= @product.supplier.name%>
+  <div class="show_part_product">
+    <div>
+      <strong>Supplier:  <a href="#"><%= @product.supplier.name%></a> </strong>
+    </div>
+    <div class="availablity">
+      <% if @product.available %>
+        <span class="available">Available</span>
+      <% else %>
+        <span>Out of Stock</span>
+      <% end %>
+    </div>
   </div>
-  <div>
-    <% if @product.available %>
-    <span>Available</span>
-    <% else %>
-    <span>Out of Stock</span>
-    <% end %>
-  </div>
-  <p>
+  <div class="rte">
     <%= @product.description %>
-    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  </p>
-  <%= form_tag '/orders', :class => 'form-inline', method: :post do %>
-    <%= label_tag :quantity %>
-    <%= text_field_tag :quantity, nil, type: 'number', class: 'small text-center form-control' %>
-    <%= hidden_field_tag :product_id, @product.id, class: "form-control"  %>
-    <%= button_tag type: 'submit', 'aria-label' => 'Buy Now', class: 'btn btn-success' do %>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+  </div>
+  <hr>
+  <div >
+    <%= form_tag '/orders', :class => 'form-inline', method: :post do %>
+      <%= label_tag :quantity %>
+      <%= text_field_tag :quantity, nil, type: 'number', class: 'small text-center form-control' %>
+      <%= hidden_field_tag :product_id, @product.id, class: "form-control"  %>
+      <%= button_tag type: 'submit', 'aria-label' => 'Buy Now', class: 'btn btn-success' do %>
       <span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-shopping-cart"></span>
+      <% end %>
     <% end %>
-  <% end %>
-  <table class="table">
+  </div>
+  <hr>
+  <table class="table table-condensed">
     <tr>
-    <th>Tax:</th>
-    <td><%= number_to_currency @product.tax %></td>
-  </tr>
-  <tr>
-    <th>Total:</th>
-    <td><%= number_to_currency @product.total %></td>
-  </tr>
+      <th>Tax:</th>
+      <td><%= number_to_currency @product.tax %></td>
+    </tr>
+    <tr>
+      <th>Total:</th>
+      <td><%= number_to_currency @product.total %></td>
+    </tr>
   </table>
 </div>
 

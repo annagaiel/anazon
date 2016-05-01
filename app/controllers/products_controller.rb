@@ -1,9 +1,13 @@
 class ProductsController < ApplicationController
   def index
+    @categories = Category.all
+
     if params[:sort]
       @products = Product.order(params[:sort] => params[:sort_order])
     elsif params[:discount]
       @products = Product.where("price < ?", 8)
+    elsif params[:category]
+      @products = Category.find_by(name: params[:category]).products
     else
       @products = Product.all
     end
@@ -33,7 +37,7 @@ class ProductsController < ApplicationController
       new_image = Image.new(url: params[:image], product_id: @new_product.id)
       new_image.save
     end
-    
+
     if @new_product.valid?
       flash[:success] = "#{@new_product.name} was created!"
       redirect_to "/products/#{@new_product.id}"

@@ -1,22 +1,26 @@
 <h1>Welcome to Anazon</h1>
 
 <div class="row">
-  <div class="col-md-12 col-md-offset-9">
+  <div class="col-md-12 col-md-offset-5">
     <strong>Sort By:</strong>
-    <a href="/products?sort=price&sort_order=asc">Lowest Price</a> <span> | </span>
+    <a href="/products?sort=price&sort_order=asc">Lowest Price</a><span> | </span>
     <a href="products/?sort=price&sort_order=desc">Highest Price</a>
+    <% @categories.each do |category| %>
+      <span> | </span>
+      <a href="/products?category=<%= category.name %>"><%= category.name %></a>
+    <% end %>
   </div>
 </div>
 
 <div class="row">
   <% @products.each do |product| %>
-    <div class="col-sm-6 col-md-3">
-      <div class="thumbnail">
-        <a href="/products/<%= product.id %>">
-          <p><%= product.name %> - <%= number_to_currency(product.price) %></p>
-          <img src="<%= product.images.first.url %>" alt="<%= product.name %>" class = 'img-responsive' />
-        </a>
-      </div>
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail">
+      <a href="/products/<%= product.id %>">
+        <p><%= product.name %> - <%= number_to_currency(product.price) %></p>
+        <img src="<%= product.images.first.url %>" alt="<%= product.name %>" class = 'img-responsive' />
+      </a>
     </div>
+  </div>
   <% end %>
 </div>

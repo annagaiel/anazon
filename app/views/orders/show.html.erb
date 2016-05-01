@@ -1,50 +1,22 @@
 <h1>Your Order</h1>
 
-<div class="row">
-    <%= @orders.first.user.email %>
-</div>
-
 <table class="table table-hover">
   <tr>
-    <th>
-      Product Name
-    </th>
-    <th>
-      Quantity
-    </th>
-    <th>
-      Price
-    </th>
-    <th>
-      Subtotal
-    </th>
-    <th>
-      Tax
-    </th>
-    <th>
-      Total
-    </th>
+    <th>Product Name</th>
+    <th>Quantity</th>
+    <th>Price</th>
+    <th>Subtotal</th>
+    <th>Tax</th>
+    <th>Total</th>
   </tr>
   <% @orders.each do |order| %>
   <tr>
-    <td>
-      <%= order.product.name %>
-    </td>
-    <td>
-      <%= order.quantity %>
-    </td>
-    <td>
-      <%= number_to_currency ( order.subtotal / order.quantity ) %>
-    </td>
-    <td>
-      <%= number_to_currency order.subtotal %>
-    </td>
-    <td>
-      <%= number_to_currency order.tax %>
-    </td>
-    <td>
-      <%= number_to_currency order.total %>
-    </td>
+    <td><%= order.product.name %></td>
+    <td><%= order.quantity %></td>
+    <td><%= number_to_currency ( order.subtotal / order.quantity ) %></td>
+    <td><%= number_to_currency order.subtotal %></td>
+    <td><%= number_to_currency order.tax %></td>
+    <td><%= number_to_currency order.total %></td>
   </tr>
   <% end %>
 </table>

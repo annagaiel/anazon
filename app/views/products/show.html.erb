@@ -3,14 +3,14 @@
     <a href="/products/<%= @product.id %>/edit" class="btn btn-success" aria-label="Edit">
       <span class="glyphicon glyphicon-edit"></span>
     </a>
-    <%= link_to "/products/#{@product.id}", class: 'btn btn-danger', 'aria-label' => 'Delete', method: :delete do %>
+    <%= link_to "/products/#{@product.id}", data: {confirm: "Do you want to delete #{@product.name.capitalize}?"},class: 'btn btn-danger', 'aria-label' => 'Delete', method: :delete do %>
     <span class="glyphicon glyphicon-trash"></span>
     <% end %>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-3">
   <div class="row thumbnail">
-    <a href="#">
+    <a class="fancybox" href="<%= @product.images.first.url %>">
       <img class="img-responsive" src="<%= @product.images.first.url %>">
     </a>
   </div>
@@ -61,31 +61,11 @@
 </div>
 
 <div class="col-xs-12 col-sm-12">
-  <div class="owl-carousel owl-theme">
-      <% @product.images.reverse.drop(1).each do |image| %>
-        <div class="item">
-          <a href="#">
-            <img class="thumbnail" src="<%= image.url %>">
-          </a>
-        </div>
-      <% end %>
-  </div>
+    <% @product.images.reverse.drop(1).each do |image| %>
+    <div class="col-md-3">
+      <a href="#">
+        <img class="thumbnail" src="<%= image.url %>">
+      </a>
+    </div>
+    <% end %>
 </div>
-
-<script>
-  $('.owl-carousel').owlCarousel({
-      margin:5,
-      items:3,
-      responsive:{
-          0:{
-              items:2
-          },
-          600:{
-              items:3
-          },
-          1000:{
-              items:5
-          }
-      }
-  })
-  </script>

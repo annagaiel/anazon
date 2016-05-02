@@ -14,6 +14,7 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder',             '~> 2.0'
 gem 'devise'
+gem 'dotenv-rails', :groups => [:development, :test]
 gem 'sdoc',                 '~> 0.4.0', group: :doc
 gem 'data-confirm-modal', github: 'ifad/data-confirm-modal'
 group :development, :test do

@@ -38,11 +38,11 @@
   </div>
   <hr>
   <div >
-    <%= form_tag '/orders', :class => 'form-inline', method: :post do %>
+    <%= form_tag '/carted_products', :class => 'form-inline', method: :post do %>
       <%= label_tag :quantity %>
       <%= text_field_tag :quantity, nil, type: 'number', class: 'small text-center form-control' %>
       <%= hidden_field_tag :product_id, @product.id, class: "form-control"  %>
-      <%= button_tag type: 'submit', 'aria-label' => 'Buy Now', class: 'btn btn-success' do %>
+      <%= button_tag type: 'submit', 'aria-label' => 'Add to Cart', class: 'btn btn-success' do %>
       <span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-shopping-cart"></span>
       <% end %>
     <% end %>

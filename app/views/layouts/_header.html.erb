@@ -15,7 +15,9 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="active">
-          <%= link_to "New product", "/products/new" %><span class="sr-only">(current)</span>
+          <% if current_user && current_user.admin %>
+            <%= link_to "New product", "/products/new" %><span class="sr-only">(current)</span>
+          <% end %>
         </li>
         <li><a href="/products?discount=true">Discount Items</a></li>
         <li><a href="/products/random">Random Product</a></li>

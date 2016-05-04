@@ -33,4 +33,11 @@ class OrdersController < ApplicationController
     @order.destroy
     redirect_to "/orders/#{@order.id}"
   end
+
+  def update
+    @order = Order.find_by(id: params[:id])
+    @order.update(completed: true)
+    flash[:success] = "Order was updated!"
+    redirect_to "/orders/#{@order.id}"
+  end
 end

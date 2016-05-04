@@ -1,22 +1,29 @@
-<h1>Your Order</h1>
+<h1>Order Confirmation</h1>
 
 <table class="table table-hover">
   <tr>
     <th>Product Name</th>
     <th>Quantity</th>
     <th>Price</th>
+  </tr>
+  <% @orders.carted_products.each do |carted_products| %>
+  <tr>
+    <td><%= carted_products.product.name %></td>
+    <td><%= carted_products.quantity %></td>
+    <td><%= number_to_currency carted_products.product.price %></td>
+  </tr>
+  <% end %>
+</table>
+
+<table class="table table-hover">
+  <tr>
     <th>Subtotal</th>
     <th>Tax</th>
     <th>Total</th>
   </tr>
-  <% @orders.each do |order| %>
   <tr>
-    <td><%= order.product.name %></td>
-    <td><%= order.quantity %></td>
-    <td><%= number_to_currency ( order.subtotal / order.quantity ) %></td>
-    <td><%= number_to_currency order.subtotal %></td>
-    <td><%= number_to_currency order.tax %></td>
-    <td><%= number_to_currency order.total %></td>
+    <td><%= number_to_currency @orders.subtotal %></td>
+    <td><%= number_to_currency @orders.tax %></td>
+    <td><%= number_to_currency @orders.total %></td>
   </tr>
-  <% end %>
 </table>

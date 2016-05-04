@@ -1,4 +1,4 @@
-<h1>Your Cart</h1>
+<h1>Checkout</h1>
 
 <table class="table table-hover">
   <tr>
@@ -8,19 +8,27 @@
     <th>Subtotal</th>
     <th>Tax</th>
     <th>Total</th>
+    <th>Action</th>
   </tr>
   <% @carted_products.each do |item| %>
   <tr>
     <td><%= item.product.name %></td>
-    <td><%= item.quantity %></td>
+    <td>
+      <%= text_field_tag :quantity,item.quantity, :class => "form-control"  %>
+    </td>
     <td><%= number_to_currency ( item.order.subtotal / item.quantity ) %></td>
     <td><%= number_to_currency item.order.subtotal %></td>
     <td><%= number_to_currency item.order.tax %></td>
     <td><%= number_to_currency item.order.total %></td>
+    <td>
+      <%= link_to "/carted_products/#{item.order.id}", data: {confirm: "Do you want to delete?"},class: 'btn btn-danger', 'aria-label' => 'Delete', method: :delete do %>
+      <span class="glyphicon glyphicon-trash"></span>
+      <% end %>
+    </td>
   </tr>
   <% end %>
 </table>
 
-<%= form_tag '/order', :class => 'form-inline', method: :post do %>
-  <%= submit_tag 'Buy Now', class: 'btn btn-success' %>
+<%= form_tag "/orders/#{@order.id}", :class => 'form-inline', method: :patch do %>
+  <%= submit_tag 'Buy Now', class: 'btn btn-warning' %>
 <% end %>

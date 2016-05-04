@@ -13,15 +13,15 @@ Rails.application.routes.draw do
   get '/products/images/new', to: 'images#new'
   post '/products/images', to: 'images#create'
   #orders
+  patch '/orders/:id', to: 'orders#update'
   post '/orders', to: 'orders#create'
   get '/orders/:id', to: 'orders#show'
   get '/orders', to: 'orders#index'
   delete '/orders/:id', to: 'orders#destroy'
-
   #carted_products
   get '/carted_products', to: 'carted_products#index'
   post '/carted_products', to: 'carted_products#create'
-
+  delete '/carted_products/:id', to: 'carted_products#destroy'
 
   # resources :products
   # The priority is based upon order of creation: first created -> highest priority.

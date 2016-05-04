@@ -44,4 +44,11 @@ class CartedProductsController < ApplicationController
     flash[:warning] = 'Item deleted from Cart!'
     redirect_to "/carted_products"
   end
+
+  def update
+    @carted_products = CartedProduct.find_by(id: params[:id])
+    @carted_products.update(quantity: )
+    flash[:warning] = 'Item quantity updated from Cart!'
+    redirect_to "/carted_products"
+  end
 end

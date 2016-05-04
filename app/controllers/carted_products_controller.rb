@@ -1,4 +1,5 @@
 class CartedProductsController < ApplicationController
+  before_action :signed_in
 
   def index
     @carted_products = Order.where(user_id: current_user.id).find_by(completed: false).carted_products
@@ -47,7 +48,6 @@ class CartedProductsController < ApplicationController
 
   def update
     @carted_products = CartedProduct.find_by(id: params[:id])
-    @carted_products.update(quantity: )
     flash[:warning] = 'Item quantity updated from Cart!'
     redirect_to "/carted_products"
   end

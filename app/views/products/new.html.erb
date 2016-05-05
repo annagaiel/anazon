@@ -1,25 +1,34 @@
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <h1>New Product</h1>
+      <div>
+        <% if @product && @product.errors.any? %>
+          <h2>
+            <%= pluralize(@product.errors.count, "error") %>
+          </h2>
+        <ul>
+          <% @product.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+        <% end %>
+      </div>
       <%= form_tag '/products', method: :post do %>
         <div class='form-group'>
           <%= label_tag :name, nil, :class => "control-label" %>
-          <%= text_field_tag :name, nil, :class => "form-control"  %>
+          <%= text_field_tag :name, @product.name, :class => "form-control"  %>
         </div>
         <div class='form-group'>
           <%= label_tag :price, nil, :class => "control-label" %>
-          <%= number_field_tag :price, nil, :class => "form-control"  %>
-        </div>
-        <div class='form-group'>
-          <%= label_tag :image, nil, :class => "control-label" %>
-          <%= text_field_tag :image, nil, :class => "form-control"  %>
+          <%= number_field_tag :price, @product.price, :class => "form-control"  %>
         </div>
         <div class='form-group'>
           <%= label_tag :description, nil, :class => "control-label" %>
-          <%= text_field_tag :description, nil, :class => "form-control"  %>
+          <%= text_field_tag :description, @product.description, :class => "form-control"  %>
         </div>
         <div class='form-group'>
-          <%= collection_select :supplier, :supplier_id, Supplier.all, :id, :name %>
+          <%= label_tag :supplier, nil, :class => "control-label" %>
+          <%= collection_select :supplier, :supplier_id, Supplier.all, :id, :name, :class => "form-control"  %>
         </div>
         <%= submit_tag 'Add Product', class: 'btn btn-success' %>
       <% end %>

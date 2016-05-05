@@ -8,9 +8,10 @@ class Product < ActiveRecord::Base
   has_many :carted_products
   has_many :orders, through: :carted_products
 
-  validates :name, presence: true
-  validates :price, presence: true
+  validates :name, presence: true, length: { minimum: 2 }
+  validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :description, presence: true
+  validates :name, uniqueness: true 
 
   DISCOUNT_THRESHOLD = 2
   QUANTITY = 0

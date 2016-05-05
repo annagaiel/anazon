@@ -9,9 +9,4 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def signed_in
-    unless current_user
-      redirect_to '/users/sign_in'
-    end
-  end
 end

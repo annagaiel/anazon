@@ -4,10 +4,7 @@
   <tr>
     <th>Product Name</th>
     <th>Quantity</th>
-    <th>Price</th>
-    <th>Subtotal</th>
-    <th>Tax</th>
-    <th>Total</th>
+    <th>Price Per Product</th>
     <th colspan="2">Action</th>
   </tr>
   <% @carted_products.each do |item| %>
@@ -16,10 +13,7 @@
     <td>
       <%= text_field_tag :quantity,item.quantity, :class => "form-control"  %>
     </td>
-    <td><%= number_to_currency ( item.order.subtotal / item.quantity ) %></td>
-    <td><%= number_to_currency item.order.subtotal %></td>
-    <td><%= number_to_currency item.order.tax %></td>
-    <td><%= number_to_currency item.order.total %></td>
+    <td><%= number_to_currency item.product.price %></td>
     <td>
       <%= link_to "/carted_products/#{item.id}", data: {confirm: "Do you want to delete #{item.product.name} from your cart?"}, class: 'btn btn-danger', 'aria-label' => 'Delete', method: :delete do %>
       <span class="glyphicon glyphicon-trash"></span>

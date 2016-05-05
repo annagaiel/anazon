@@ -1,7 +1,8 @@
 class CartedProductsController < ApplicationController
-  before_action :signed_in
+  before_action :authenticate_user!
 
   def index
+    binding.pry
     @carted_products = Order.where(user_id: current_user.id).find_by(completed: false).carted_products
     @order = Order.where(user_id: current_user.id).find_by(completed: false)
     redirect_to "/products" if @carted_products.nil?

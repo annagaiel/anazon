@@ -8,34 +8,9 @@ class CartedProductsController < ApplicationController
   end
 
   def create
-    product = Product.find_by(id: params[:product_id])
-    quantity = params[:quantity].to_i
-    total_tax = product.tax * quantity
-    subtotal = product.price * quantity
-    total = total_tax + subtotal
-    if !Order.find_by(user_id: current_user.id, completed: false)
-      order = Order.new(user_id: current_user.id,
-                        subtotal: subtotal,
-                        tax: total_tax,
-                        total: total
-                        )
-      order.save
-      carted_products = CartedProduct.new(product_id: product.id,
-                                          order_id: order.id,
-                                          quantity: quantity
-                                          )
-      carted_products.save
-      p "created new order"
-    else
-       order = Order.find_by(user_id: current_user.id)
-       carted_products = CartedProduct.new(product_id: product.id,
-                                           order_id: order.id,
-                                           quantity: quantity
-                                           )
-       carted_products.save
-       flash[:success] = 'Item added to Cart!'
-       p "updated old order"
-    end
+    order = (current_user.orders.find_by(completed: false) || Order.create(completed: false, user_id: current_user.id))
+    carted_product = CartedProduct.new(product_id: params[:product_id], quantity: params[:quantity], order_id: order.id)
+    carted_product.save
     redirect_to "/carted_products"
   end
 

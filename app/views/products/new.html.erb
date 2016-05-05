@@ -28,7 +28,7 @@
         </div>
         <div class='form-group'>
           <%= label_tag :supplier, nil, :class => "control-label" %>
-          <%= collection_select :supplier, :supplier_id, Supplier.all, :id, :name, :class => "form-control"  %>
+          <%= collection_select :supplier, :supplier_id, Supplier.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"} %>
         </div>
         <%= submit_tag 'Add Product', class: 'btn btn-success' %>
       <% end %>
